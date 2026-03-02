@@ -1,13 +1,16 @@
 import streamlit as st
 import pickle
 import re
+import nltk
+nltk.download('stopwords', quiet = True)
 from nltk.corpus import stopwords
+stop_words = set(stopwords.words('english'))
 
 # Load model and tfidf
 model = pickle.load(open('model.pkl', 'rb'))
 tfidf = pickle.load(open('tfidf.pkl', 'rb'))
 
-stop_words = set(stopwords.words('english'))
+
 
 
 def clean_text(content):
@@ -34,3 +37,4 @@ if st.button("Predict"):
         st.success("✅ This appears to be REAL NEWS!")
     else:
         st.error("🚨 This appears to be FAKE NEWS!")
+
